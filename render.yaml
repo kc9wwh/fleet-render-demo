@@ -13,9 +13,7 @@ services:
       - key: FLEET_SERVER_PRIVATE_KEY
         generateValue: true
       - key: FLEET_MYSQL_ADDRESS
-        fromService:
           name: fleet-mysql
-          type: web
           property: host
       - key: FLEET_MYSQL_PORT
         value: 3306
