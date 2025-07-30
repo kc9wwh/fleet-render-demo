@@ -13,7 +13,7 @@ services:
       - key: FLEET_SERVER_PRIVATE_KEY
         generateValue: true
       - key: FLEET_MYSQL_ADDRESS
-          value: fleet-mysql
+        value: fleet-mysql
       - key: FLEET_MYSQL_PORT
         value: 3306
       - key: FLEET_MYSQL_DATABASE
