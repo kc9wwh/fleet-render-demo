@@ -58,6 +58,8 @@ services:
         generateValue: true
       - key: MYSQL_USER
         value: "fleetuser"
+      - key: PORT
+        value: 3306
 
   - name: fleet-redis
     plan: free
