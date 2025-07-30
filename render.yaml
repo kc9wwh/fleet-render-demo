@@ -1,0 +1,64 @@
+services:
+  - name: fleet
+    plan: free
+    type: web
+    runtime: image
+    image:
+      url: 'fleetdm/fleet:latest'
+    startCommand: "fleet prepare --no-prompt=true db && fleet serve"
+    healthCheckPath: /healthz
+    envVars:
+      - key: FLEET_SOFTWARE_INSTALLER_STORE_DIR
+        value: '/opt/fleet/installers'
+      - key: FLEET_SERVER_PRIVATE_KEY
+        generateValue: true
+      - key: FLEET_MYSQL_ADDRESS
+        fromService:
+          name: fleet-mysql
+          type: web
+          property: hostport
+      - key: FLEET_MYSQL_DATABASE
+        fromService:
+          name: fleet-mysql
+          type: web
+          envVarKey: MYSQL_DATABASE
+      - key: FLEET_MYSQL_PASSWORD
+        fromService:
+          name: fleet-mysql
+          type: web
+          envVarKey: MYSQL_PASSWORD
+      - key: FLEET_MYSQL_USERNAME
+        fromService:
+          name: fleet-mysql
+          type: web
+          envVarKey: MYSQL_USER
+      - key: FLEET_REDIS_ADDRESS
+        fromService:
+          name: fleet-redis
+          type: redis
+          property: connectionString
+      - key: FLEET_SERVER_TLS
+        value: 'false'
+      - key: PORT
+        value: 8080
+
+  - name: fleet-mysql
+    plan: free
+    type: web
+    runtime: docker
+    repo: https://github.com/kc9wwh/fleet-render-demo
+    envVars:
+      - key: MYSQL_DATABASE
+        value: true
+      - key: MYSQL_PASSWORD
+        generateValue: true
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+      - key: MYSQL_USER
+        value: true
+
+  - name: fleet-redis
+    plan: free # May use free plan for testing or short-lived deployments
+    type: redis
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList: []
