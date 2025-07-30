@@ -16,7 +16,7 @@ services:
         fromService:
           name: fleet-mysql
           type: web
-          property: connectionString
+          property: hostport
       - key: FLEET_MYSQL_PORT
         value: 3306
       - key: FLEET_MYSQL_DATABASE
