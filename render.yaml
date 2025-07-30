@@ -15,24 +15,29 @@ services:
       - key: FLEET_MYSQL_ADDRESS
         fromService:
           name: fleet-mysql
+          type: web
           property: host
       - key: FLEET_MYSQL_PORT
         value: 3306
       - key: FLEET_MYSQL_DATABASE
         fromService:
           name: fleet-mysql
+          type: web
           envVarKey: MYSQL_DATABASE
       - key: FLEET_MYSQL_PASSWORD
         fromService:
           name: fleet-mysql
+          type: web
           envVarKey: MYSQL_PASSWORD
       - key: FLEET_MYSQL_USERNAME
         fromService:
           name: fleet-mysql
+          type: web
           envVarKey: MYSQL_USER
       - key: FLEET_REDIS_ADDRESS
         fromService:
           name: fleet-redis
+          type: redis
           property: connectionString
       - key: FLEET_SERVER_TLS
         value: 'false'
@@ -52,7 +57,7 @@ services:
       - key: MYSQL_ROOT_PASSWORD
         generateValue: true
       - key: MYSQL_USER
-        value: "fleet"
+        value: "fleetuser"
 
   - name: fleet-redis
     plan: free
