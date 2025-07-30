@@ -3,7 +3,7 @@ FROM mysql:8.0-debian
 
 # Install netcat, which we need for our health check server.
 # The -y flag auto-confirms the installation.
-RUN apt-get update && apt-get install -y netcat
+RUN apt-get update && apt-get install -y netcat-openbsd
 
 # Copy our startup script into the container's root directory
 COPY start.sh /start.sh
