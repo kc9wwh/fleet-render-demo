@@ -1,5 +1,5 @@
 # Start from the official MySQL 8 image
-FROM mysql:8.0
+FROM mysql:8.0-debian
 
 # Install netcat, which we need for our health check server.
 # The -y flag auto-confirms the installation.
