@@ -15,27 +15,24 @@ services:
       - key: FLEET_MYSQL_ADDRESS
         fromService:
           name: fleet-mysql
-          type: web
-          property: hostport
+          property: host
+      - key: FLEET_MYSQL_PORT
+        value: 3306
       - key: FLEET_MYSQL_DATABASE
         fromService:
           name: fleet-mysql
-          type: web
           envVarKey: MYSQL_DATABASE
       - key: FLEET_MYSQL_PASSWORD
         fromService:
           name: fleet-mysql
-          type: web
           envVarKey: MYSQL_PASSWORD
       - key: FLEET_MYSQL_USERNAME
         fromService:
           name: fleet-mysql
-          type: web
           envVarKey: MYSQL_USER
       - key: FLEET_REDIS_ADDRESS
         fromService:
           name: fleet-redis
-          type: redis
           property: connectionString
       - key: FLEET_SERVER_TLS
         value: 'false'
@@ -49,16 +46,16 @@ services:
     repo: https://github.com/kc9wwh/fleet-render-demo
     envVars:
       - key: MYSQL_DATABASE
-        value: true
+        value: "fleetdb"
       - key: MYSQL_PASSWORD
         generateValue: true
       - key: MYSQL_ROOT_PASSWORD
         generateValue: true
       - key: MYSQL_USER
-        value: true
+        value: "fleet"
 
   - name: fleet-redis
-    plan: free # May use free plan for testing or short-lived deployments
+    plan: free
     type: redis
     maxmemoryPolicy: allkeys-lru
     ipAllowList: []
