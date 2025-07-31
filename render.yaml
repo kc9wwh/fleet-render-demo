@@ -43,37 +43,35 @@ services:
         value: 8080
 
   - name: fleet-db-init
-      plan: starter
-      type: job
-      runtime: image
-      image:
-        url: 'fleetdm/fleet:latest'
-      # This command is the one-time setup task
-      startCommand: "fleet prepare --no-prompt=true db"
-      # It needs the same environment variables to connect to the DB
-      envVars:
-        - key: FLEET_SERVER_PRIVATE_KEY
-          generateValue: true
-        - key: FLEET_MYSQL_ADDRESS
-          fromService:
-            name: fleet-mysql
-            type: pserv
-            property: hostport
-        - key: FLEET_MYSQL_DATABASE
-          fromService:
-            name: fleet-mysql
-            type: pserv
-            envVarKey: MYSQL_DATABASE
-        - key: FLEET_MYSQL_PASSWORD
-          fromService:
-            name: fleet-mysql
-            type: pserv
-            envVarKey: MYSQL_PASSWORD
-        - key: FLEET_MYSQL_USERNAME
-          fromService:
-            name: fleet-mysql
-            type: pserv
-            envVarKey: MYSQL_USER
+    plan: starter
+    type: job
+    runtime: image
+    image:
+      url: 'fleetdm/fleet:latest'
+    startCommand: "fleet prepare --no-prompt=true db"
+    envVars:
+      - key: FLEET_SERVER_PRIVATE_KEY
+        generateValue: true
+      - key: FLEET_MYSQL_ADDRESS
+        fromService:
+          name: fleet-mysql
+          type: pserv
+          property: hostport
+      - key: FLEET_MYSQL_DATABASE
+        fromService:
+          name: fleet-mysql
+          type: pserv
+          envVarKey: MYSQL_DATABASE
+      - key: FLEET_MYSQL_PASSWORD
+        fromService:
+          name: fleet-mysql
+          type: pserv
+          envVarKey: MYSQL_PASSWORD
+      - key: FLEET_MYSQL_USERNAME
+        fromService:
+          name: fleet-mysql
+          type: pserv
+          envVarKey: MYSQL_USER
 
   - name: fleet-mysql
     plan: starter
