@@ -43,7 +43,7 @@ services:
         value: 8080
 
   - name: fleet-db-init
-      plan: starer
+      plan: starter
       type: job
       runtime: image
       image:
