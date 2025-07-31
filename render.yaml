@@ -43,9 +43,9 @@ services:
           type: redis
           property: connectionString
       - key: FLEET_MDM_WINDOWS_WSTEP_IDENTITY_CERT_BYTES
-        generateValue: false
+        sync: false
       - key: FLEET_MDM_WINDOWS_WSTEP_IDENTITY_KEY_BYTES
-        generateValue: false
+        sync: false
       - key: FLEET_SERVER_TLS
         value: 'false'
       - key: PORT
